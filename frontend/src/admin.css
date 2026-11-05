@@ -1,0 +1,110 @@
+/* Beheerpaneel: rustiger dan de publieke site, gebouwd om snel te werken op de gsm */
+.admin { min-height: 100vh; padding-bottom: 84px; }
+.admin-top { position: sticky; top: 0; z-index: 30; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.admin-top-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
+.admin-me { display: flex; align-items: center; gap: 4px; }
+.admin-main { padding-top: 22px; }
+
+/* Navigatie: onderaan op gsm, bovenaan op groot scherm */
+.admin-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--surface); border-top: 1px solid var(--line); padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+}
+.admin-nav a { display: grid; justify-items: center; gap: 2px; padding: 6px 2px; border-radius: 12px; color: var(--ink-2); text-decoration: none; font-size: 0.76rem; font-weight: 700; }
+.admin-nav a.active { color: var(--pen); background: var(--pen-soft); }
+@media (min-width: 820px) {
+  .admin { padding-bottom: 40px; }
+  .admin-nav { position: static; display: flex; gap: 4px; background: none; border: 0; padding: 0; }
+  .admin-nav a { display: inline-flex; gap: 8px; align-items: center; font-size: 0.95rem; padding: 8px 14px; }
+}
+
+.admin-login { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
+.admin-login .card-form { width: 100%; max-width: 400px; }
+
+.admin-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.admin-head .h2 { margin: 0; }
+.narrow-admin { max-width: 760px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 14px; }
+@media (min-width: 640px) { .stat-row { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; text-decoration: none; color: var(--ink); display: grid; }
+.stat strong { font-family: var(--f-display); font-size: 1.7rem; line-height: 1.1; }
+.stat span { color: var(--ink-2); font-size: 0.88rem; }
+.stat:hover { border-color: var(--pen); color: var(--ink); }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0 14px; }
+.tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; overflow-x: auto; max-width: 100%; }
+.tabs button { border: 0; background: none; padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; color: var(--ink-2); }
+.tabs button.on { background: var(--ink); color: #fff; }
+.search { flex: 1; min-width: 200px; }
+.search .input { min-height: 42px; padding: 8px 14px; border-radius: 999px; }
+.toggle { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.toggle input { width: 18px; height: 18px; accent-color: var(--pen); flex: none; }
+
+.req-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.req-row { display: flex; gap: 12px; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px 12px 12px; text-decoration: none; color: var(--ink); }
+.req-row:hover { border-color: var(--pen); color: var(--ink); }
+.req-row.urgent { border-color: var(--c-phys); box-shadow: inset 4px 0 0 var(--c-phys); }
+.req-subj { flex: none; width: 6px; border-radius: 3px; background: var(--c); }
+.req-main { flex: 1; min-width: 0; }
+.req-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.req-meta { color: var(--ink-2); font-size: 0.9rem; }
+.req-next { display: inline-flex; gap: 5px; align-items: center; font-size: 0.85rem; font-weight: 700; color: var(--pen); margin-top: 2px; }
+.req-time { flex: none; color: var(--ink-3); font-size: 0.8rem; white-space: nowrap; }
+
+.badge { display: inline-flex; align-items: center; gap: 3px; font-size: 0.75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.badge.st-nieuw { background: var(--marker); border-color: #e9d23a; color: var(--ink); }
+.badge.st-in_behandeling { background: var(--pen-soft); border-color: #c4d0ff; color: var(--pen-deep); }
+.badge.st-ingepland, .badge.ls-gepland { background: var(--ok-soft); border-color: #9fe0cd; color: #075e4b; }
+.badge.st-afgewezen, .badge.st-geannuleerd, .badge.ls-geannuleerd { background: var(--bad-soft); border-color: #f4b4ad; color: #9b1c1c; }
+.badge.urgent { background: var(--c-phys); border-color: var(--c-phys); color: #fff; }
+
+.empty { text-align: center; padding: 36px 16px; background: var(--surface); border: 1.5px dashed var(--line); border-radius: var(--r-lg); color: var(--ink-2); }
+
+.detail .back { margin-bottom: 10px; }
+.detail-head { margin-bottom: 14px; }
+.detail-head .h2 { margin-bottom: 4px; }
+.detail-grid { display: grid; gap: 14px; }
+.detail-col { display: grid; gap: 14px; align-content: start; min-width: 0; }
+@media (min-width: 980px) { .detail-grid { grid-template-columns: 0.9fr 1.1fr; align-items: start; } }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px; display: grid; gap: 10px; min-width: 0; }
+.panel .h3 { margin: 0; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.panel.form { gap: 16px; }
+.contact-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.contact-btns .btn { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.warn-text { color: #8a5a00; background: var(--warn-soft); padding: 8px 10px; border-radius: 8px; margin: 0; }
+.sep { border: 0; border-top: 1px solid var(--line); margin: 6px 0; width: 100%; }
+.lesson-form { display: grid; gap: 12px; }
+.lesson-form .btn-primary { justify-self: start; }
+.lessons { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.lesson { border: 1px solid var(--line); border-radius: var(--r); padding: 12px; display: grid; gap: 10px; }
+.lesson.st-geannuleerd { opacity: 0.6; }
+.lesson-top { display: flex; justify-content: space-between; gap: 10px; }
+.lesson-top strong { }
+.decline { display: grid; gap: 8px; padding: 12px; background: var(--bad-soft); border-radius: var(--r); }
+
+.agenda-day { margin-bottom: 18px; }
+.agenda-date { font-family: var(--f-display); font-size: 1rem; color: var(--ink-2); margin: 0 0 8px; }
+.agenda-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.agenda-item { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--c); border-radius: var(--r); padding: 10px 12px; }
+.agenda-item.st-geannuleerd { opacity: 0.55; }
+.agenda-time { font-family: var(--f-display); font-weight: 750; font-size: 1.15rem; min-width: 52px; }
+.agenda-body { flex: 1; display: grid; text-decoration: none; color: var(--ink); min-width: 0; }
+
+.wl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.wl-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.wl-list li.done { opacity: 0.6; }
+.wl-list .toggle { align-items: flex-start; }
+.wl-list .toggle input { margin-top: 4px; }
+.sticky-bottom { position: sticky; bottom: 76px; box-shadow: 0 -10px 30px -12px rgba(20, 27, 61, 0.25); margin-top: 14px; }
+@media (min-width: 820px) { .sticky-bottom { bottom: 12px; } }
+
+.project-edit { border: 1px dashed var(--line); border-radius: var(--r); padding: 14px; display: grid; gap: 12px; }
+
+/* backdrop-filter maakt van de header een containing block voor fixed-elementen;
+   op gsm moet de navigatie aan het scherm plakken, dus daar geen blur */
+@media (max-width: 819px) {
+  .admin-top { backdrop-filter: none; -webkit-backdrop-filter: none; background: #fff; }
+}

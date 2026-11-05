@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /beheer
+Disallow: /aanvraag/
+Disallow: /wachtlijst/
+Disallow: /privacy/verwijderen/

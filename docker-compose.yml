@@ -1,0 +1,64 @@
+# Bijlesplatform – volledige stack
+#   docker compose up -d --build           → productie
+#   docker compose --profile dev up -d     → idem + Mailpit om mails te bekijken (http://localhost:8025)
+
+name: bijlesplatform
+
+x-backend: &backend
+  build: ./backend
+  image: bijlesplatform-backend:latest
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    NODE_ENV: production
+    TZ: Europe/Brussels
+    DATABASE_URL: postgres://${POSTGRES_USER:-bijles}:${POSTGRES_PASSWORD:?Zet POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:-bijles}
+  depends_on:
+    db:
+      condition: service_healthy
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-bijles}
+      POSTGRES_USER: ${POSTGRES_USER:-bijles}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Zet POSTGRES_PASSWORD in .env}
+      TZ: Europe/Brussels
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    <<: *backend
+    command: ["node", "src/server.js"]
+
+  worker:
+    <<: *backend
+    command: ["node", "src/worker.js"]
+    healthcheck:
+      disable: true
+
+  web:
+    build: ./frontend
+    image: bijlesplatform-web:latest
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+
+  mailpit:
+    image: axllent/mailpit:latest
+    profiles: ["dev"]
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+
+volumes:
+  db-data:
