@@ -40,6 +40,7 @@ export default function TutorPage() {
               <Icon name="calendar" size={26} />
               <span><strong>Formulier invullen</strong><span>Duid aan wanneer je kan</span></span>
             </a>
+            {t.whatsapp_url && <span className="paths-or" aria-hidden="true">of</span>}
             {t.whatsapp_url && (
               <a href={t.whatsapp_url} className="path path-wa" target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon size={26} />
@@ -51,7 +52,7 @@ export default function TutorPage() {
       </section>
 
       <section className="section">
-        <div className="wrap narrow">
+        <div className="wrap">
           <Reveal as="h2" className="h2">Over {t.first_name}</Reveal>
           <Reveal className="prose">{paragraphs.map((p, i) => <p key={i}>{p}</p>)}</Reveal>
         </div>
@@ -80,7 +81,7 @@ export default function TutorPage() {
       )}
 
       <section className="section" id="aanvragen">
-        <div className="wrap narrow">
+        <div className="wrap">
           <h2 className="h2">Bijles aanvragen bij {t.first_name}</h2>
           <p className="muted">Velden met * zijn verplicht. Het duurt ongeveer twee minuten.</p>
           <RequestForm tutor={t} preselect={preselect} />

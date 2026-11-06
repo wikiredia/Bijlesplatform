@@ -59,6 +59,7 @@ function requestRefinements(d, ctx) {
 
 export const publicRequestSchema = z.object({
   ...requestFields,
+  school_year: z.coerce.number({ message: 'Kies in welk jaar je zit' }).int().min(1, 'Kies in welk jaar je zit').max(6),
   tutor: z.enum(['yeno', 'reda']),
   consent: z.literal(true, { message: 'Je moet akkoord gaan met de privacyverklaring' }),
   website: z.string().max(0).optional().or(z.literal('')), // honeypot

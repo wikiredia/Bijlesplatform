@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "mock-api", "runtimeExecutable": "node", "runtimeArgs": ["/private/tmp/claude-501/-Users-redakadi-bijlesplatform/c9af8db4-6a36-4014-a907-f27af730f1ef/scratchpad/mock-api.mjs"], "port": 3000 },
+    { "name": "frontend", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "frontend", "run", "dev", "--", "--port", "5173"], "port": 5173 }
+  ]
+}

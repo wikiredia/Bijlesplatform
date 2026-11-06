@@ -26,6 +26,7 @@ export default function RequestForm({ tutor, preselect }) {
     if (!f.first_name.trim()) e.first_name = 'Vul je voornaam in';
     if (!f.email.trim() && !f.phone.trim()) e.email = 'Vul een e-mailadres of telefoonnummer in';
     if (f.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) e.email = 'Dit e-mailadres klopt niet';
+    if (!f.school_year) e.school_year = 'Kies in welk jaar je zit';
     if (!f.urgency) e.urgency = 'Kies wanneer je bijles wilt';
     if (f.urgency === 'tegen_datum' && !f.deadline) e.deadline = 'Kies een datum';
     if (!f.consent) e.consent = 'Je moet akkoord gaan om je aanvraag te versturen';
@@ -51,7 +52,7 @@ export default function RequestForm({ tutor, preselect }) {
       const res = await api('/public/requests', {
         method: 'POST',
         body: {
-          tutor: tutor.slug, subject: f.subject, school_year: f.school_year || null, school_track: f.school_track,
+          tutor: tutor.slug, subject: f.subject, school_year: f.school_year, school_track: f.school_track,
           urgency: f.urgency, deadline: f.urgency === 'tegen_datum' ? f.deadline : '',
           available_dates: f.dates.available, unavailable_dates: f.dates.unavailable,
           time_prefs: f.time_prefs, location_pref: f.location_pref || null, message: f.message,
@@ -105,7 +106,7 @@ export default function RequestForm({ tutor, preselect }) {
             <Choice options={Object.fromEntries(tutor.subjects.map((s) => [s, SUBJECTS[s]?.label || s]))} value={f.subject} onChange={set('subject')} name="Vak" />
           </Field>
         )}
-        <Field label="In welk jaar zit je?" error={errors.school_year} optional>
+        <Field label="In welk jaar zit je?" required error={errors.school_year}>
           <Choice options={YEARS} value={String(f.school_year)} onChange={(v) => set('school_year')(f.school_year === v ? '' : v)} name="Jaar" className="choice-years" />
         </Field>
         <Field label="Richting" optional error={errors.school_track}>

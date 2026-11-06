@@ -1,10 +1,11 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource-variable/fraunces/index.css';
 import '@fontsource/atkinson-hyperlegible/400.css';
 import '@fontsource/atkinson-hyperlegible/700.css';
 import './styles.css';
+import { applyBrand } from './brand.js';
 import { PublicLayout } from './components/Layout.jsx';
 import { Spinner } from './components/ui.jsx';
 import Home from './pages/Home.jsx';
@@ -15,6 +16,8 @@ import WaitlistManage from './pages/WaitlistManage.jsx';
 import Privacy from './pages/Privacy.jsx';
 import { DeletionRequest, DeletionConfirm } from './pages/Deletion.jsx';
 import NotFound from './pages/NotFound.jsx';
+
+applyBrand();
 
 // Het beheergedeelte wordt apart geladen, zodat bezoekers het niet mee downloaden
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'));

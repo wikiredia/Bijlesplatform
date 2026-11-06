@@ -2,17 +2,27 @@ import { Link } from 'react-router-dom';
 import { Icon } from '../components/Icon.jsx';
 import { Reveal, Initials, useApi, useTitle } from '../components/ui.jsx';
 
+// Vakken op de startpagina. Nieuw vak? Voeg hier een regel toe.
+// `c` is de kleur van het icoontje (laat leeg voor de standaardkleur).
 const SUBJECT_ROWS = [
-  { key: 'wiskunde', label: 'Wiskunde', who: 'bij Yeno', to: '/bijles/yeno?vak=wiskunde', icon: 'math' },
-  { key: 'fysica', label: 'Fysica', who: 'bij Yeno', to: '/bijles/yeno?vak=fysica', icon: 'phys' },
-  { key: 'programmeren', label: 'Programmeren / ICT', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'code' },
-  { key: 'andere', label: 'Een ander vak', who: 'zet je op de wachtlijst', to: '/andere', icon: 'more' },
+  { key: 'wiskunde', label: 'Wiskunde', who: 'bij Yeno', to: '/bijles/yeno?vak=wiskunde', icon: 'math', c: 'var(--c-math)' },
+  { key: 'fysica', label: 'Fysica', who: 'bij Yeno', to: '/bijles/yeno?vak=fysica', icon: 'phys', c: 'var(--c-phys)' },
+  { key: 'programmeren', label: 'Programmeren', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'code', c: 'var(--c-code)' },
+  { key: 'informatica', label: 'Informatica / ICT', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'monitor', c: '#0b7fa8' },
+  { key: 'web', label: 'Websites & apps', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'globe', c: '#6d4cf0' },
+  { key: 'games', label: 'Games maken', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'game', c: '#d6336c' },
+  { key: 'elektronica', label: 'Elektronica & Arduino', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'chip', c: '#d97706' },
+];
+
+const TUTORS = [
+  { slug: 'yeno', name: 'Yeno Roelants', subjects: ['Wiskunde', 'Fysica'] },
+  { slug: 'reda', name: 'Reda Kadi', subjects: ['Programmeren', 'Informatica / ICT', 'Websites & apps', 'Games maken', 'Elektronica & Arduino'] },
 ];
 
 const STEPS = [
   { t: 'Kies je vak', d: 'Je komt meteen bij de juiste bijlesgever terecht.' },
-  { t: 'Duid aan wanneer het past', d: 'Kies of het dringend is en tik in de kalender de dagen aan waarop je kan. Liever een berichtje? Stuur gewoon een WhatsApp.' },
-  { t: 'Je krijgt een voorstel', d: 'Yeno of Reda checkt de data en plant de les in. Je krijgt een bevestiging per mail, met een herinnering de dag ervoor.' },
+  { t: 'Vul info in of stuur een WhatsApp', d: 'Kies of het dringend is en wanneer je kan. Liever een berichtje? Stuur gewoon een WhatsApp.' },
+  { t: 'Je krijgt een voorstel', d: 'We plannen de les in. Je krijgt een bevestiging per mail, met een herinnering.' },
 ];
 
 const FAQ = [
@@ -34,21 +44,48 @@ export default function Home() {
         <div className="hero-glow" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <h1 className="hero-title">Bijles wiskunde, fysica en programmeren</h1>
+            <h1 className="hero-title"><span>Bijles</span> <span>wiskunde,</span> <span>fysica en</span> <span>programmeren</span></h1>
             <p className="lead">Van het 1ste tot en met het 6de middelbaar. Kies waarvoor je hulp zoekt en vraag meteen een les aan.</p>
           </div>
-          <nav className="subjects" aria-label="Kies een vak">
+          <nav className="subjects-wrap" aria-label="Kies een vak">
+            <div className="subjects">
             {SUBJECT_ROWS.map((s, i) => (
-              <Link key={s.key} to={s.to} className={`subject s-${s.key}`} style={{ '--i': i }}>
-                <span className="subject-icon"><Icon name={s.icon} size={24} /></span>
+              <Link key={s.key} to={s.to} className="subject" style={{ '--i': i, ...(s.c && { '--c': s.c }) }}>
+                <span className="subject-icon"><Icon name={s.icon} size={22} /></span>
                 <span className="subject-text">
-                  <span className="subject-label"><span className="hl">{s.label}</span></span>
+                  <span className="subject-label">{s.label}</span>
                   <span className="subject-who">{s.who}</span>
                 </span>
                 <Icon name="chevR" className="subject-chev" />
               </Link>
             ))}
+            </div>
+            <p className="subjects-other">Zoek je een ander vak? <Link to="/andere">Zet je op de wachtlijst</Link></p>
           </nav>
+        </div>
+      </section>
+
+      <section className="section section-tint">
+        <div className="wrap">
+          <Reveal as="h2" className="h2">Je bijlesgevers</Reveal>
+          <div className="tutor-cards">
+            {TUTORS.map((t, i) => {
+              const q = t.slug === 'yeno' ? yeno : reda;
+              return (
+                <Reveal key={t.slug} delay={i * 100}>
+                  <Link to={`/bijles/${t.slug}`} className={`tutor-card t-${t.slug}`}>
+                    {q.data?.photo_url ? <img src={q.data.photo_url} alt="" className="avatar" /> : <Initials name={t.name} />}
+                    <div>
+                      <h3 className="h3">{t.name}</h3>
+                      {q.data?.headline && <p className="muted">{q.data.headline}</p>}
+                      <ul className="tutor-card-subjects">{t.subjects.map((v) => <li key={v}>{v}</li>)}</ul>
+                    </div>
+                    <span className="tutor-card-cta">Bekijk profiel <Icon name="arrow" size={18} /></span>
+                  </Link>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -66,29 +103,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-tint">
-        <div className="wrap">
-          <Reveal as="h2" className="h2">Je bijlesgevers</Reveal>
-          <div className="tutor-cards">
-            {[{ slug: 'yeno', name: 'Yeno Roelants', subjects: 'Wiskunde & fysica', q: yeno }, { slug: 'reda', name: 'Reda Kadi', subjects: 'Programmeren & ICT', q: reda }].map((t, i) => (
-              <Reveal key={t.slug} delay={i * 100}>
-                <Link to={`/bijles/${t.slug}`} className={`tutor-card t-${t.slug}`}>
-                  {t.q.data?.photo_url ? <img src={t.q.data.photo_url} alt="" className="avatar" /> : <Initials name={t.name} />}
-                  <div>
-                    <h3 className="h3">{t.name}</h3>
-                    <p className="tutor-card-sub">{t.subjects}</p>
-                    {t.q.data?.headline && <p className="muted">{t.q.data.headline}</p>}
-                  </div>
-                  <Icon name="chevR" className="subject-chev" />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section">
-        <div className="wrap narrow">
+        <div className="wrap">
           <Reveal as="h2" className="h2">Vaak gevraagd</Reveal>
           <div className="faq">
             {FAQ.map((f) => (

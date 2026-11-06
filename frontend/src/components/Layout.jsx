@@ -1,11 +1,14 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { BRAND } from '../brand.js';
 
 export function Logo() {
   return (
     <Link to="/" className="logo" aria-label="Naar de startpagina">
-      <span className="logo-mark" aria-hidden="true">b</span>
-      <span className="logo-text">bijles<span className="logo-dot">.</span></span>
+      {BRAND.image
+        ? <img src={BRAND.image} alt="" className="logo-img" />
+        : <span className="logo-mark" aria-hidden="true">{BRAND.mark}</span>}
+      <span className="logo-text">{BRAND.name}{BRAND.suffix && <span className="logo-dot">{BRAND.suffix}</span>}</span>
     </Link>
   );
 }
