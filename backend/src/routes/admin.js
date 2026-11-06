@@ -146,7 +146,7 @@ adminRouter.get('/requests/:id', asyncH(async (req, res) => {
     lessons, messages,
   });
 }));
-const subjectWord = (s) => ({ wiskunde: 'wiskunde', fysica: 'fysica', programmeren: 'programmeren' }[s] || s);
+const subjectWord = (s) => ({ wiskunde: 'wiskunde', fysica: 'fysica', programmeren: 'programmeren', ict: 'ICT', elektronica: 'elektronica' }[s] || s);
 
 adminRouter.post('/requests', asyncH(async (req, res) => {
   const data = parse(adminRequestSchema, req.body);

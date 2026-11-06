@@ -8,15 +8,13 @@ const SUBJECT_ROWS = [
   { key: 'wiskunde', label: 'Wiskunde', who: 'bij Yeno', to: '/bijles/yeno?vak=wiskunde', icon: 'math', c: 'var(--c-math)' },
   { key: 'fysica', label: 'Fysica', who: 'bij Yeno', to: '/bijles/yeno?vak=fysica', icon: 'phys', c: 'var(--c-phys)' },
   { key: 'programmeren', label: 'Programmeren', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'code', c: 'var(--c-code)' },
-  { key: 'informatica', label: 'Informatica / ICT', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'monitor', c: '#0b7fa8' },
-  { key: 'web', label: 'Websites & apps', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'globe', c: '#6d4cf0' },
-  { key: 'games', label: 'Games maken', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'game', c: '#d6336c' },
-  { key: 'elektronica', label: 'Elektronica & Arduino', who: 'bij Reda', to: '/bijles/reda?vak=programmeren', icon: 'chip', c: '#d97706' },
+  { key: 'ict', label: 'ICT', who: 'bij Reda', to: '/bijles/reda?vak=ict', icon: 'monitor', c: 'var(--c-ict)' },
+  { key: 'elektronica', label: 'Elektronica', who: 'bij Reda', to: '/bijles/reda?vak=elektronica', icon: 'chip', c: 'var(--c-elec)' },
 ];
 
 const TUTORS = [
   { slug: 'yeno', name: 'Yeno Roelants', subjects: ['Wiskunde', 'Fysica'] },
-  { slug: 'reda', name: 'Reda Kadi', subjects: ['Programmeren', 'Informatica / ICT', 'Websites & apps', 'Games maken', 'Elektronica & Arduino'] },
+  { slug: 'reda', name: 'Reda Kadi', subjects: ['Programmeren', 'ICT', 'Elektronica'] },
 ];
 
 const STEPS = [

@@ -45,7 +45,9 @@ export const brusselsParts = (ts) => {
 export const SUBJECTS = {
   wiskunde: { label: 'Wiskunde', tutor: 'yeno', color: 'var(--c-math)' },
   fysica: { label: 'Fysica', tutor: 'yeno', color: 'var(--c-phys)' },
-  programmeren: { label: 'Programmeren / ICT', tutor: 'reda', color: 'var(--c-code)' },
+  programmeren: { label: 'Programmeren', tutor: 'reda', color: 'var(--c-code)' },
+  ict: { label: 'ICT', tutor: 'reda', color: 'var(--c-ict)' },
+  elektronica: { label: 'Elektronica', tutor: 'reda', color: 'var(--c-elec)' },
 };
 
 export const URGENCY = {

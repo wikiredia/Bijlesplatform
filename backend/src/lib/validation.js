@@ -26,7 +26,7 @@ const futureDate = isoDate.refine((v) => DateTime.fromISO(v, { zone: config.time
 const dateList = z.array(futureDate).max(90).default([]).transform((a) => [...new Set(a)].sort());
 
 export const requestFields = {
-  subject: z.enum(['wiskunde', 'fysica', 'programmeren']),
+  subject: z.enum(['wiskunde', 'fysica', 'programmeren', 'ict', 'elektronica']),
   school_year: z.coerce.number().int().min(1).max(6).optional().nullable(),
   school_track: optText(80),
   first_name: trimmed(60).min(1, 'Voornaam is verplicht'),

@@ -49,4 +49,4 @@ export function WhatsAppIcon({ size = 20 }) {
   );
 }
 
-export const subjectIcon = { wiskunde: 'math', fysica: 'phys', programmeren: 'code', andere: 'more' };
+export const subjectIcon = { wiskunde: 'math', fysica: 'phys', programmeren: 'code', ict: 'monitor', elektronica: 'chip', andere: 'more' };

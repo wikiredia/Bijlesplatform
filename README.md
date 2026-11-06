@@ -1,6 +1,6 @@
 # Bijlesplatform
 
-Website waar leerlingen (1ste – 6de middelbaar) of hun ouders bijles aanvragen bij **Yeno Roelants** (wiskunde, fysica) of **Reda Kadi** (programmeren/ICT). Voor andere vakken kan je je op een wachtlijst zetten.
+Website waar leerlingen (1ste – 6de middelbaar) of hun ouders bijles aanvragen bij **Yeno Roelants** (wiskunde, fysica) of **Reda Kadi** (programmeren, ICT, elektronica). Voor andere vakken kan je je op een wachtlijst zetten.
 
 Alles draait in Docker Compose, zodat je het makkelijk naar een andere server verhuist.
 
@@ -18,7 +18,7 @@ Alles draait in Docker Compose, zodat je het makkelijk naar een andere server ve
 ## Wat zit erin
 
 **Publieke site (mobile-first)**
-- Startpagina met vakkeuze: wiskunde en fysica → Yeno, programmeren/ICT → Reda, ander vak → wachtlijst
+- Startpagina met vakkeuze: wiskunde en fysica → Yeno, programmeren, ICT en elektronica → Reda, ander vak → wachtlijst
 - Tutorpagina met beschrijving, kernpunten, projecten en twee evenwaardige wegen: formulier of WhatsApp
 - Aanvraagformulier: vak, jaar en richting, *dringend / deze week / volgende week / tegen een datum / geen haast*, kalender om dagen aan te duiden waarop je wél of níet kan, voorkeursmomenten, aan huis of online, bericht, “ik ben de ouder” (+ naam kind). Voornaam en e-mail **of** telefoon zijn verplicht
 - Persoonlijke statuspagina (geheime link in de mail): status, geplande lessen, berichten heen en weer, annuleren, gegevens verwijderen

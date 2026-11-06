@@ -68,7 +68,7 @@ export const config = {
       first_name: 'Reda',
       email: env.TUTOR_REDA_EMAIL || 'reda.kadi07@gmail.com',
       whatsapp: env.TUTOR_REDA_WHATSAPP || '',
-      subjects: ['programmeren'],
+      subjects: ['programmeren', 'ict', 'elektronica'],
     },
   ],
   adminInitialPassword: env.ADMIN_INITIAL_PASSWORD || '',
@@ -78,7 +78,9 @@ export const config = {
 export const SUBJECTS = {
   wiskunde: 'Wiskunde',
   fysica: 'Fysica',
-  programmeren: 'Programmeren / ICT',
+  programmeren: 'Programmeren',
+  ict: 'ICT',
+  elektronica: 'Elektronica',
 };
 
 export const URGENCY_LABELS = {
@@ -111,9 +113,9 @@ export const STATUS_LABELS = {
   geannuleerd: 'Geannuleerd',
 };
 
-// Voor in een zin: "bijles programmeren/ICT"
+// Voor in een zin: "bijles programmeren"
 export function subjectWord(s) {
-  return { wiskunde: 'wiskunde', fysica: 'fysica', programmeren: 'programmeren/ICT' }[s] || s;
+  return { wiskunde: 'wiskunde', fysica: 'fysica', programmeren: 'programmeren', ict: 'ICT', elektronica: 'elektronica' }[s] || s;
 }
 
 export function subjectLabel(s) {

@@ -15,6 +15,8 @@
   --c-math: #2346d8;
   --c-phys: #ff6b4a;
   --c-code: #0e9f80;
+  --c-ict: #0b7fa8;
+  --c-elec: #d97706;
   --c-other: #8b5cf6;
   --ok: #0e9f80;
   --ok-soft: #dcf5ee;
@@ -225,10 +227,10 @@ p { margin: 0 0 12px; }
   transition: border-color 0.2s, transform 0.3s var(--ease);
 }
 .tutor-card:hover { border-color: var(--pen); transform: translateY(-2px); color: var(--ink); }
-.tutor-card > div { flex: 1; display: grid; gap: 4px; justify-items: center; }
+.tutor-card > div { flex: 1; display: grid; gap: 4px; justify-items: center; align-content: start; }
 .tutor-card .avatar { width: 136px; height: 136px; border-radius: 50%; font-size: 2.6rem; }
 .tutor-card .subject-chev { display: none; }
-.tutor-card-subjects { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.tutor-card-subjects { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; }
 .tutor-card-subjects li { font-size: 0.85rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--pen-soft); color: var(--pen-deep); }
 .t-reda .tutor-card-subjects li { background: color-mix(in srgb, var(--c-code) 14%, white); color: color-mix(in srgb, var(--c-code) 70%, black); }
 .tutor-card-cta { margin-top: 14px; font-weight: 700; color: var(--pen); display: inline-flex; gap: 6px; align-items: center; }
